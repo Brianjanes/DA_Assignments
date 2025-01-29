@@ -16,9 +16,9 @@ public class SingleLinkedList {
         return head;
     }
 
-    //Insert int linked list
+        //Insert int linked list
         //0. if the link doesn't
-        //1. inserting at the begining
+        //1. inserting at the beginning
         //2. inserting at the ending
         //3. inserting anywhere
 
@@ -48,7 +48,7 @@ public class SingleLinkedList {
         size++;
     }
 
-    // Traverse a Linked List
+        // Traverse a Linked List
     public void traverseLinkedList(){
         if (head == null) {
             System.out.println("SLL does not exist");
@@ -83,10 +83,47 @@ public class SingleLinkedList {
         return false;
     }
 
-
     //Deleting a Node from the linked list
     //0. if the link doesn't
-    //1. delete at the begining
+    //1. delete at the beginning
     //2. delete at the ending
     //3. delete anywhere
+
+    public void deleteNode(int location) {
+        if (head == null) {
+            System.out.println("The Linked List does not exist");
+            return;
+        } else if (location == 0) {
+            // Delete from beginning
+            head = head.next;
+            if (size == 1) {
+                tail = null;
+            }
+            size--;
+            if (size == 0) {
+                head = tail = null;
+            }
+        } else if (location >= size) {
+            // Delete from end
+            if (size == 1) {
+                head = tail = null;
+            } else {
+                Node tempNode = head;
+                for (int i = 0; i < size - 2; i++) {
+                    tempNode = tempNode.next;
+                }
+                tail = tempNode;
+                tail.next = null;
+            }
+            size--;
+        } else {
+            // Delete from middle
+            Node tempNode = head;
+            for (int i = 0; i < location - 1; i++) {
+                tempNode = tempNode.next;
+            }
+            tempNode.next = tempNode.next.next;
+            size--;
+        }
+    }
 }
