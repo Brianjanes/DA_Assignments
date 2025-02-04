@@ -37,7 +37,7 @@ class Animal {
 
 // this is putting it all together, create the animal shelter queue, add cats, add dogs, remove any, remove cat, remove dog, etc.
 public class AnimalShelter {
-    private Queue <Animal> animals = new LinkedList<>;
+    private Queue <Animal> animals = new LinkedList<>();
 
     public void enQueue(Animal animal) {
         animals.add(animal);
@@ -48,7 +48,7 @@ public class AnimalShelter {
     }
 
     private Animal deQueueByType(AnimalType type) {
-        for (Animal animal : animals) {
+        for (Animal animal : new LinkedList<>(animals)) {
             if (animal.getType() == type) {
                 animals.remove(animal);
                 return animal;
@@ -75,9 +75,18 @@ public class AnimalShelter {
         shelter.enQueue(new Animal("Jackie", AnimalType.Cat));
 
         System.out.println("Dequeue any: " + shelter.deQueueAny().getName());
-        System.out.println("Dequeue dog: " + shelter.deQueueDog().getName());
-        System.out.println("Dequeue cat: " + shelter.deQueueCat().getName());
-        System.out.println("Dequeue dog: " + shelter.deQueueDog().getName());
+
+        Animal dog = shelter.deQueueDog();
+        System.out.println("Dequeue dog: " + (dog != null ? dog.getName() : "No dogs available"));
+
+        Animal cat = shelter.deQueueCat();
+        System.out.println("Dequeue cat: " + (cat != null ? cat.getName() : "No cats available"));
+
+        dog = shelter.deQueueDog();
+        System.out.println("Dequeue dog: " + (dog != null ? dog.getName() : "No dogs available"));
+
+        cat = shelter.deQueueCat();
+        System.out.println("Dequeue cat: " + (cat != null ? cat.getName() : "No cats available"));
     }
 }
 
